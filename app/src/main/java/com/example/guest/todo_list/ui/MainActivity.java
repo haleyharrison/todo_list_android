@@ -33,7 +33,7 @@ public class MainActivity extends ListActivity {
         mTasks = new ArrayList<>();
 
         for (Task task : Task.all()) {
-            mTasks.add(task.getDescription());
+            mTasks.add(task.getDescription()) ;
         }
 
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mTasks);
