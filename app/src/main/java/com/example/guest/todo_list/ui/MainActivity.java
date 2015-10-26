@@ -37,7 +37,7 @@ public class MainActivity extends ListActivity {
         mCategories = new ArrayList<>();
 
         for (Category category : Category.all()) {
-            mCategories.add(category.getName());
+            mCategories.add(category.getName( ));
         }
 
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mCategories);
