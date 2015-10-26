@@ -24,7 +24,7 @@ public class Task extends Model {
     public Task() {
         super();
     }
-    public Task(String description, Category, category){
+    public Task(String description, Category category){
         super();
         mDescription = description;
         mCategory = category;
