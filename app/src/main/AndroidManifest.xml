@@ -18,10 +18,21 @@
             </intent-filter>
         </activity>
 
-        <meta-data android:name="AA_DB_NAME" android:value="Todo.db" />
-        <meta-data android:name="AA_DB_VERSION" android:value="2" />
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Todo.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="2" />
+
+        <activity
+            android:name=".ui.CategoryActivity"
+            android:label="@string/title_activity_category"
+            android:parentActivityName=".ui.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.guest.todo_list.ui.MainActivity" />
+        </activity>
     </application>
-
-
 
 </manifest>

@@ -42,4 +42,10 @@ public class Category extends Model {
     }
 
 
+    public static Category find(String name) {
+        return new Select()
+                .from(Category.class)
+                .where("Name = ?", name)
+                .executeSingle();
+    }
 }
