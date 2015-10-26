@@ -1,4 +1,4 @@
-package com.example.guest.todo_list;
+package com.example.guest.todo_list.ui;
 
 import android.app.ListActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.guest.todo_list.R;
+import com.example.guest.todo_list.models.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,11 @@ public class MainActivity extends ListActivity {
         mNewTaskButton = (Button) findViewById(R.id.newTaskButton);
         mNewTaskText = (EditText) findViewById(R.id.newTask);
         mTasks = new ArrayList<>();
+
+        for (Task task : Task.all()) {
+            mTasks.add(task.getDescription());
+        }
+
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mTasks);
             setListAdapter(mAdapter);
 
@@ -40,8 +48,10 @@ public class MainActivity extends ListActivity {
     }
 
     private void addTask() {
-        String newTask = mNewTaskText.getText().toString();
-        mTasks.add(newTask);
+        String description = mNewTaskText.getText().toString();
+        Task newTask = new Task(description);
+        newTask.save();
+        mTasks.add(description);
         mAdapter.notifyDataSetChanged();
     }
 
