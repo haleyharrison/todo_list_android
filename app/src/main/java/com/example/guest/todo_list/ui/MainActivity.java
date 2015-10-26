@@ -28,6 +28,10 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Task newTask = new Task();
+        newTask.save();
+        newTask.delete();//these will run migrations.
+
         mNewTaskButton = (Button) findViewById(R.id.newTaskButton);
         mNewTaskText = (EditText) findViewById(R.id.newTask);
         mTasks = new ArrayList<>();
