@@ -11,10 +11,10 @@ import java.util.List;
  * Created by Guest on 10/26/15.
  */
 
-@Table(name= "categories", id = "id")
+@Table(name= "categories", id = "_id")
 public class Category extends Model {
 
-    @Column(name = "name")
+    @Column(name = "Name")
     private String mName;
 
     public Category(){

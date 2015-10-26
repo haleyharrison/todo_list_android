@@ -1,26 +1,25 @@
 package com.example.guest.todo_list.ui;
 
 import android.app.ListActivity;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.example.guest.todo_list.R;
+import com.example.guest.todo_list.models.Category;
 import com.example.guest.todo_list.models.Task;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends ListActivity {
 
-    private ArrayList<String> mTasks;
-    private Button mNewTaskButton;
-    private EditText mNewTaskText;
+    private ArrayList<String> mCategories;
+    private Button mNewCategoryButton;
+    private EditText mNewCategoryText;
     private ArrayAdapter<String> mAdapter;
 
     @Override
@@ -30,32 +29,42 @@ public class MainActivity extends ListActivity {
 
         Task newTask = new Task();
         newTask.save();
-        newTask.delete();//these will run migrations.
+        newTask.delete();
+        //these will run migrations.
 
-        mNewTaskButton = (Button) findViewById(R.id.newTaskButton);
-        mNewTaskText = (EditText) findViewById(R.id.newTask);
-        mTasks = new ArrayList<>();
+        mNewCategoryButton = (Button) findViewById(R.id.newCategoryButton);
+        mNewCategoryText = (EditText) findViewById(R.id.newCategory);
+        mCategories = new ArrayList<>();
 
-        for (Task task : Task.all()) {
-            mTasks.add(task.getDescription());
+        for (Category category : Category.all()) {
+            mCategories.add(category.getName());
         }
 
-        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mTasks);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mCategories);
             setListAdapter(mAdapter);
 
-        mNewTaskButton.setOnClickListener(new View.OnClickListener() {
+        mNewCategoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addTask();
+                addCategory();
             }
         });
     }
 
-    private void addTask() {
-        String description = mNewTaskText.getText().toString();
-        Task newTask = new Task(description);
-        newTask.save();
-        mTasks.add(description);
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        String thisCategoryName = mCategories.get(position);
+        Intent intent = new Intent(this, CategoryActivity.class);
+        intent.putExtra("categoryName", thisCategoryName);
+        startActivity(intent);
+    }
+
+    private void addCategory() {
+        String name = mNewCategoryText.getText().toString();
+        Category newCategory = new Category(name);
+        newCategory.save();
+        mCategories.add(name);
         mAdapter.notifyDataSetChanged();
     }
 
