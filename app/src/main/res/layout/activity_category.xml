@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add task"
+        android:text="add category"
         android:id="@+id/newTaskButton"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
